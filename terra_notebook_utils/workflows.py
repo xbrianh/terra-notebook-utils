@@ -76,9 +76,11 @@ def estimate_workflow_cost(submission_id: str,
 def _catch_key_error(func):
     def _wrapper(execution_metadata: dict):
         try:
+            print(execution_metadata)
             return func(execution_metadata)
         except KeyError as ke:
             missing_key = ke.args[0]
+            print(execution_metadata)
             raise TNUCostException(f"'{func.__name__}' failed: '{missing_key}' not found in workflow metadata")
     return _wrapper
 

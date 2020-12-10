@@ -78,7 +78,6 @@ def _catch_key_error(func):
         try:
             return func(execution_metadata)
         except KeyError as ke:
-            print(execution_metadata)
             missing_key = ke.args[0]
             raise TNUCostException(f"'{func.__name__}' failed: '{missing_key}' not found in workflow metadata")
     return _wrapper

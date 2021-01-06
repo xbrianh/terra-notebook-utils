@@ -5,6 +5,7 @@ import time
 import random
 import unittest
 from uuid import uuid4
+from typing import Dict, List, Union
 
 pkg_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))  # noqa
 sys.path.insert(0, pkg_root)  # noqa

@@ -247,7 +247,6 @@ def del_rows(table: str, items: Iterable[ROW_OR_NAME], **kwargs):
 def del_row(table: str, item: ROW_OR_NAME, **kwargs):
     del_rows(table, [item], **kwargs)
 
-
 def delete(table: str, **kwargs):
     with Deleter(table, **kwargs) as td:
         for row in list_rows(table, **kwargs):

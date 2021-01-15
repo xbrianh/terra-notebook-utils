@@ -78,6 +78,7 @@ def estimate_submission_cost(args: argparse.Namespace):
                           ("shard", 6),
                           ("cpus", 5),
                           ("memory (GB)", 12),
+                          ("disk (GB)", 10),
                           ("duration (h)", 13),
                           ("call cached", 12),
                           ("cost", 5)])
@@ -86,16 +87,17 @@ def estimate_submission_cost(args: argparse.Namespace):
     for workflow_id, workflow_metadata in workflows_metadata.items():
         shard = 1
         for item in workflows.estimate_workflow_cost(workflow_id, workflow_metadata):
-            cost, cpus, mem, duration, call_cached = (item[k] for k in ('cost',
-                                                                        'number_of_cpus',
-                                                                        'memory',
-                                                                        'duration',
-                                                                        'call_cached'))
-            reporter.print_line(workflow_id, shard, cpus, mem, duration / 3600, call_cached, cost)
+            cost, cpus, mem, disk, duration, call_cached = (item[k] for k in ('cost',
+                                                                              'number_of_cpus',
+                                                                              'memory',
+                                                                              'disk',
+                                                                              'duration',
+                                                                              'call_cached'))
+            reporter.print_line(workflow_id, shard, cpus, mem, disk, duration / 3600, call_cached, cost)
             total += cost
             shard += 1
     reporter.print_divider()
-    reporter.print_line("", "", "", "", "", "", total)
+    reporter.print_line("", "", "", "", "", "", "", total)
 
 class TXTReport:
     def __init__(self, fields: List[Tuple[str, int]]):
